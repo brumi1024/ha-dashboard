@@ -206,8 +206,8 @@ export const evEntities = {
   vehicleLock: 'lock.raikiri_lock',
   vehicleStatus: 'binary_sensor.raikiri_status',
   chargeCable: 'binary_sensor.raikiri_charge_cable',
-  location: 'device_tracker.raikiri_location_tracker',
-  goEStatus: 'sensor.goe_249593_car',
+  location: 'device_tracker.raikiri_location',
+  goEStatus: 'sensor.goe_249593_car_value',
   goEEnergyTotal: 'sensor.goe_249593_eto',
 } as const
 
