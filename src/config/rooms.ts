@@ -46,7 +46,10 @@ export const rooms: RoomConfig[] = [
     category: 'main',
     lights: ['light.living_room_main_light', 'light.living_room_hallway_light'],
     switches: [],
-    appliances: [],
+    appliances: [
+      { name: 'TV', icon: 'mdi:television', entity: 'media_player.living_room_tv' },
+      { name: 'Sonos', icon: 'mdi:speaker', entity: 'media_player.living_room_sonos' },
+    ],
   },
   {
     id: 'dining-room',
