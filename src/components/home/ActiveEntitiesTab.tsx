@@ -5,7 +5,7 @@ import { Icon } from '@mdi/react'
 import {
   mdiLightbulbOn,
   mdiLightbulbOutline,
-  mdiGarageDoor,
+  mdiGarage,
   mdiLockOpen,
 } from '@mdi/js'
 import { colors, spacing } from '../../styles/theme'
@@ -86,8 +86,8 @@ export function ActiveEntitiesTab() {
 
       <div className="section-label" style={{ marginTop: spacing.md }}>SECURITY</div>
       <SecurityEntityStatus entityId={securityEntities.frontDoorLock} icon={mdiLockOpen} label="Front Door" />
-      <SecurityEntityStatus entityId={securityEntities.rightGarageDoor} icon={mdiGarageDoor} label="Right Garage" />
-      <SecurityEntityStatus entityId={securityEntities.garageDoor} icon={mdiGarageDoor} label="Left Garage" />
+      <SecurityEntityStatus entityId={securityEntities.rightGarageDoor} icon={mdiGarage} label="Right Garage" />
+      <SecurityEntityStatus entityId={securityEntities.garageDoor} icon={mdiGarage} label="Left Garage" />
 
       <div className="section-label" style={{ marginTop: spacing.md }}>ACTIVE LIGHTS</div>
       {allLightEntities.map(({ entityId, roomName }) => (
