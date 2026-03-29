@@ -4,6 +4,10 @@ import { GreetingCard } from '../components/home/GreetingCard'
 import { TemperatureDisplay } from '../components/home/TemperatureDisplay'
 import { ScenesGrid } from '../components/home/ScenesGrid'
 import { SecurityStatus } from '../components/home/SecurityStatus'
+import { NotificationBadge } from '../components/home/NotificationBadge'
+import { ModesSection } from '../components/home/ModesSection'
+import { EventsTab } from '../components/home/EventsTab'
+import { ActiveEntitiesTab } from '../components/home/ActiveEntitiesTab'
 import { TabBar } from '../components/layout/TabBar'
 import { spacing, colors } from '../styles/theme'
 
@@ -21,22 +25,26 @@ export function HomeView() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: spacing.lg, alignItems: 'center', fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif" }}>
-      <div style={{ fontSize: '14px', color: colors.textMuted, marginTop: spacing.md }}>{dateStr} - {timeStr}</div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: spacing.sm, marginTop: spacing.md }}>
+        <div style={{ fontSize: '14px', color: colors.textMuted }}>{dateStr} - {timeStr}</div>
+        <NotificationBadge />
+      </div>
       <WeatherBadge />
       <GreetingCard />
       <TabBar tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
       {activeTab === 'home' && (
         <div className="stagger-in" style={{ display: 'flex', flexDirection: 'column', gap: spacing.xl, width: '100%', maxWidth: '600px' }}>
+          <ModesSection />
           <TemperatureDisplay />
           <ScenesGrid />
           <SecurityStatus />
         </div>
       )}
       {activeTab === 'events' && (
-        <div style={{ color: colors.textMuted, textAlign: 'center', padding: spacing.xl }}>Events view coming soon</div>
+        <EventsTab />
       )}
       {activeTab === 'active' && (
-        <div style={{ color: colors.textMuted, textAlign: 'center', padding: spacing.xl }}>Active entities view coming soon</div>
+        <ActiveEntitiesTab />
       )}
     </div>
   )
