@@ -1,6 +1,7 @@
 import { VehicleCard } from '../components/ev/VehicleCard'
 import { ChargerMode } from '../components/ev/ChargerMode'
 import { GoECharger } from '../components/ev/GoECharger'
+import { GoEControls } from '../components/ev/GoEControls'
 import { spacing, colors } from '../styles/theme'
 
 export function EVChargingView() {
@@ -14,6 +15,8 @@ export function EVChargingView() {
       <ChargerMode />
       <div style={dividerStyle} />
       <GoECharger />
+      <div style={dividerStyle} />
+      <GoEControls />
     </div>
   )
 }
