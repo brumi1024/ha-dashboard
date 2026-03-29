@@ -53,6 +53,12 @@ export const colors = {
   // Sidebar
   sidebarBg: 'rgba(10, 26, 18, 0.75)',
   sidebarActive: 'rgba(255, 255, 255, 0.08)',
+
+  // Accent aliases for component use
+  accentAmber: '#FFD60A',
+  accentGreen: '#30D158',
+  accentBlue: '#64D2FF',
+  accentRed: '#FF453A',
 } as const
 
 export const spacing = {
