@@ -1,0 +1,321 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Apple Liquid Glass — adapted for dark smart home */
+  --bg-base: #0a1a12;
+  --bg-elevated: #0f2519;
+  --bg-gradient-a: #143d24;
+  --bg-gradient-b: #1a5035;
+  --bg-gradient-c: #0d3020;
+  --bg-accent-glow: rgba(100, 210, 150, 0.12);
+
+  /* Liquid Glass surfaces */
+  --liquid-glass: rgba(255, 255, 255, 0.08);
+  --liquid-glass-hover: rgba(255, 255, 255, 0.12);
+  --liquid-glass-active: rgba(255, 255, 255, 0.16);
+  --liquid-glass-prominent: rgba(255, 255, 255, 0.10);
+
+  /* Refraction borders — the key to Liquid Glass */
+  --refraction-top: rgba(255, 255, 255, 0.25);
+  --refraction-side: rgba(255, 255, 255, 0.08);
+  --refraction-bottom: rgba(0, 0, 0, 0.15);
+
+  /* Text — Apple uses pure white hierarchy on dark */
+  --text-primary: rgba(255, 255, 255, 0.95);
+  --text-secondary: rgba(255, 255, 255, 0.55);
+  --text-tertiary: rgba(255, 255, 255, 0.35);
+
+  /* Accent colors — vibrant, Apple-grade */
+  --accent-amber: #FFD60A;
+  --accent-amber-soft: rgba(255, 214, 10, 0.15);
+  --accent-amber-glow: rgba(255, 214, 10, 0.25);
+  --accent-teal: #64D2FF;
+  --accent-teal-soft: rgba(100, 210, 255, 0.12);
+  --accent-green: #30D158;
+  --accent-green-soft: rgba(48, 209, 88, 0.12);
+  --accent-red: #FF453A;
+  --accent-red-soft: rgba(255, 69, 58, 0.12);
+  --accent-blue: #0A84FF;
+  --accent-blue-soft: rgba(10, 132, 255, 0.12);
+  --accent-purple: #BF5AF2;
+
+  /* Radii — Apple uses very generous rounding */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+  --radius-pill: 9999px;
+
+  /* Shadows — layered for depth */
+  --shadow-glass:
+    0 0.5px 0 0 var(--refraction-top) inset,
+    0 -0.5px 0 0 var(--refraction-bottom) inset,
+    0 4px 16px rgba(0, 0, 0, 0.15),
+    0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-glass-elevated:
+    0 0.5px 0 0 var(--refraction-top) inset,
+    0 -0.5px 0 0 var(--refraction-bottom) inset,
+    0 8px 32px rgba(0, 0, 0, 0.25),
+    0 2px 6px rgba(0, 0, 0, 0.12);
+  --shadow-glass-pill:
+    0 0.5px 0 0 rgba(255, 255, 255, 0.2) inset,
+    0 2px 8px rgba(0, 0, 0, 0.1);
+
+  /* Apple system font stack */
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
+    system-ui, 'Helvetica Neue', sans-serif;
+  font-size: 15px;
+  line-height: 1.47;
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'kern' 1;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--bg-base);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ============================================
+   LIQUID GLASS SURFACES
+   ============================================ */
+
+/* Primary glass panel — cards, sections */
+.liquid-glass {
+  background: var(--liquid-glass);
+  backdrop-filter: blur(40px) saturate(1.8);
+  -webkit-backdrop-filter: blur(40px) saturate(1.8);
+  border: 0.5px solid var(--refraction-side);
+  border-top-color: var(--refraction-top);
+  border-bottom-color: var(--refraction-bottom);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glass);
+  transition: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.liquid-glass:hover {
+  background: var(--liquid-glass-hover);
+  box-shadow: var(--shadow-glass-elevated);
+  transform: translateY(-2px) scale(1.01);
+}
+
+/* Prominent glass — for room cards, hero elements */
+.liquid-glass-prominent {
+  background: var(--liquid-glass-prominent);
+  backdrop-filter: blur(50px) saturate(2);
+  -webkit-backdrop-filter: blur(50px) saturate(2);
+  border: 0.5px solid var(--refraction-side);
+  border-top-color: var(--refraction-top);
+  border-bottom-color: var(--refraction-bottom);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-glass);
+  transition: all 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+  cursor: pointer;
+}
+
+.liquid-glass-prominent:hover {
+  background: var(--liquid-glass-hover);
+  box-shadow: var(--shadow-glass-elevated);
+  transform: translateY(-4px) scale(1.02);
+}
+
+/* Glass pill — chips, badges, tab buttons */
+.liquid-pill {
+  background: var(--liquid-glass);
+  backdrop-filter: blur(30px) saturate(1.6);
+  -webkit-backdrop-filter: blur(30px) saturate(1.6);
+  border: 0.5px solid var(--refraction-side);
+  border-top-color: rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-glass-pill);
+  transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.liquid-pill:hover {
+  background: var(--liquid-glass-hover);
+  border-top-color: rgba(255, 255, 255, 0.25);
+}
+
+.liquid-pill-active {
+  background: var(--liquid-glass-active);
+  border-top-color: rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 0.5px 0 0 rgba(255, 255, 255, 0.3) inset,
+    0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   ANIMATED BACKGROUND
+   ============================================ */
+
+@keyframes mesh-shift-1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  25% { transform: translate(60px, -80px) rotate(5deg) scale(1.15); }
+  50% { transform: translate(-30px, 50px) rotate(-3deg) scale(0.95); }
+  75% { transform: translate(80px, 30px) rotate(2deg) scale(1.08); }
+}
+
+@keyframes mesh-shift-2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  33% { transform: translate(-80px, 70px) rotate(-4deg) scale(1.1); }
+  66% { transform: translate(60px, -50px) rotate(3deg) scale(0.92); }
+}
+
+@keyframes mesh-shift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  30% { transform: translate(50px, 60px) scale(1.2); }
+  60% { transform: translate(-70px, -20px) scale(0.85); }
+}
+
+.bg-mesh {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+  z-index: 0;
+}
+
+.bg-mesh-1 {
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(circle, rgba(48, 209, 88, 0.18), transparent 60%);
+  filter: blur(120px);
+  top: -25%;
+  right: -15%;
+  animation: mesh-shift-1 28s ease-in-out infinite;
+}
+
+.bg-mesh-2 {
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(20, 61, 36, 0.9), transparent 60%);
+  filter: blur(100px);
+  bottom: -25%;
+  left: -20%;
+  animation: mesh-shift-2 35s ease-in-out infinite;
+}
+
+.bg-mesh-3 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(100, 210, 255, 0.08), transparent 60%);
+  filter: blur(100px);
+  top: 30%;
+  left: 20%;
+  animation: mesh-shift-3 22s ease-in-out infinite;
+}
+
+/* Subtle specular sheen that drifts */
+@keyframes sheen-drift {
+  0%, 100% { opacity: 0.03; transform: translateX(-20%) rotate(-15deg); }
+  50% { opacity: 0.06; transform: translateX(20%) rotate(-15deg); }
+}
+
+.bg-sheen {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    -15deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.03) 45%,
+    transparent 55%
+  );
+  pointer-events: none;
+  z-index: 0;
+  animation: sheen-drift 15s ease-in-out infinite;
+}
+
+/* ============================================
+   STAGGER ANIMATIONS (Apple spring timing)
+   ============================================ */
+
+@keyframes spring-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  60% {
+    transform: translateY(-3px) scale(1.005);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.stagger-in > * {
+  opacity: 0;
+  animation: spring-in 0.6s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+.stagger-in > *:nth-child(1) { animation-delay: 0.04s; }
+.stagger-in > *:nth-child(2) { animation-delay: 0.08s; }
+.stagger-in > *:nth-child(3) { animation-delay: 0.12s; }
+.stagger-in > *:nth-child(4) { animation-delay: 0.16s; }
+.stagger-in > *:nth-child(5) { animation-delay: 0.2s; }
+.stagger-in > *:nth-child(6) { animation-delay: 0.24s; }
+.stagger-in > *:nth-child(7) { animation-delay: 0.28s; }
+.stagger-in > *:nth-child(8) { animation-delay: 0.32s; }
+.stagger-in > *:nth-child(9) { animation-delay: 0.36s; }
+.stagger-in > *:nth-child(10) { animation-delay: 0.4s; }
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
+/* Section label — small caps, muted */
+.section-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  letter-spacing: 0.02em;
+  margin-bottom: 12px;
+}
+
+/* Large title — SF Pro Display style */
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--text-primary);
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+::selection {
+  background: rgba(48, 209, 88, 0.3);
+  color: var(--text-primary);
+}
