@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Sidebar } from './Sidebar'
+import { MediaPlayerBar } from './MediaPlayerBar'
 import { colors } from '../../styles/theme'
 
 const springTransition = {
@@ -37,6 +38,7 @@ export function AppShell() {
       />
 
       <Sidebar />
+      <MediaPlayerBar />
       <main
         style={{
           position: 'relative',
