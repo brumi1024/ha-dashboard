@@ -216,3 +216,51 @@ export const securityEntities = {
   rightGarageDoor: 'cover.right_garage_door',
   garageDoor: 'cover.garage_door',
 } as const
+
+export const homeEntities = {
+  homeMode: 'input_select.home_mode',
+  notificationCount: 'sensor.active_notification_count',
+  notificationsEnabled: 'input_boolean.notifications_enabled',
+  activeLightsCount: 'sensor.active_lights_count',
+} as const
+
+export const calendarEntities = [
+  'calendar.benjamin_s_calendar',
+  'calendar.birthdays',
+  'calendar.privat',
+  'calendar.bteke_cloudera_com',
+  'calendar.holidays_in_hungary',
+  'calendar.mvm_next',
+] as const
+
+export const goEEntities = {
+  carConnected: 'binary_sensor.goe_249593_car_0',
+  carState: 'sensor.goe_249593_car_value',
+  energyTotal: 'sensor.goe_249593_eto',
+  powerTotal: 'sensor.goe_249593_nrg_11',
+  requestedCurrent: 'number.goe_249593_amp',
+  forceState: 'select.goe_249593_frc',
+  logicMode: 'select.goe_249593_lmo',
+  chargingDuration: 'sensor.goe_249593_cdi_value',
+  chargingAllowed: 'binary_sensor.goe_249593_alw',
+  voltageL1: 'sensor.goe_249593_nrg_0',
+  voltageL2: 'sensor.goe_249593_nrg_1',
+  voltageL3: 'sensor.goe_249593_nrg_2',
+  currentL1: 'sensor.goe_249593_nrg_4',
+  currentL2: 'sensor.goe_249593_nrg_5',
+  currentL3: 'sensor.goe_249593_nrg_6',
+  tempSensor1: 'sensor.goe_249593_tma_0',
+  tempSensor2: 'sensor.goe_249593_tma_1',
+} as const
+
+export const evChargerEntities = {
+  mode: 'input_select.ev_charger_mode',
+  maxAmps: 'input_number.ev_charger_max_amps',
+  gridFallbackAmps: 'input_number.ev_charger_grid_fallback_amps',
+  targetAmps: 'sensor.ev_charger_target_amps',
+} as const
+
+export const mediaEntities = {
+  livingRoomSonos: 'media_player.living_room_sonos',
+  livingRoomTV: 'media_player.living_room_tv',
+} as const
