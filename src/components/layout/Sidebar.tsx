@@ -1,5 +1,5 @@
 import { Icon } from '@mdi/react'
-import { mdiHome, mdiFloorPlan, mdiSolarPower, mdiCarElectric, mdiDotsHorizontal } from '@mdi/js'
+import { mdiHome, mdiFloorPlan, mdiSolarPower, mdiCarElectric, mdiCogOutline, mdiDotsHorizontal } from '@mdi/js'
 import { NavLink } from 'react-router-dom'
 import { colors, borderRadius } from '../../styles/theme'
 
@@ -8,6 +8,7 @@ const navItems = [
   { to: '/rooms', icon: mdiFloorPlan, label: 'Rooms' },
   { to: '/energy/solar', icon: mdiSolarPower, label: 'Energy' },
   { to: '/energy/ev', icon: mdiCarElectric, label: 'EV' },
+  { to: '/system', icon: mdiCogOutline, label: 'System' },
   { to: '/more', icon: mdiDotsHorizontal, label: 'More' },
 ]
 

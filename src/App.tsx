@@ -7,6 +7,7 @@ import { RoomsView } from './views/RoomsView'
 import { RoomDetailPage } from './views/RoomDetailPage'
 import { SolarGridView } from './views/SolarGridView'
 import { EVChargingView } from './views/EVChargingView'
+import { SystemView } from './views/SystemView'
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
               <Route path="rooms/:roomId" element={<RoomDetailPage />} />
               <Route path="energy/solar" element={<SolarGridView />} />
               <Route path="energy/ev" element={<EVChargingView />} />
+              <Route path="system" element={<SystemView />} />
             </Route>
           </Routes>
         </BrowserRouter>
