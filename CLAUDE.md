@@ -14,17 +14,18 @@ src/
 ├── main.tsx                    # Entry point
 ├── index.css                   # Global CSS — Liquid Glass classes, animations, background
 ├── config/
-│   └── rooms.ts                # All entity IDs, room definitions, scene actions, energy/EV entities
+│   └── rooms.ts                # All entity IDs, room definitions, scene actions, energy/EV/go-e/home/calendar/media entities
 ├── styles/
 │   └── theme.ts                # Color tokens, spacing, border radius
 ├── components/
-│   ├── layout/                 # AppShell, Sidebar, TabBar
+│   ├── layout/                 # AppShell, Sidebar, TabBar, MediaPlayerBar
 │   ├── shared/                 # StatBadge, AnimatedCounter, DeviceCard, DeviceSection
-│   ├── home/                   # WeatherBadge, GreetingCard, TemperatureDisplay, ScenesGrid, SecurityStatus
+│   ├── home/                   # WeatherBadge, GreetingCard, TemperatureDisplay, ScenesGrid, SecurityStatus, ModesSection, NotificationBadge, EventsTab, ActiveEntitiesTab
 │   ├── rooms/                  # RoomCard, RoomDetailView, ActiveTab
 │   ├── energy/                 # BalanceHeader, SolarChart, GridSection, AmperageSection, NetMeteringSection, ProductionStats
-│   └── ev/                     # VehicleCard, ChargerMode, GoECharger
-└── views/                      # HomeView, RoomsView, RoomDetailPage, SolarGridView, EVChargingView
+│   ├── ev/                     # VehicleCard, ChargerMode, GoECharger, GoEControls
+│   └── system/                 # SystemHealth, UpdatesList
+└── views/                      # HomeView, RoomsView, RoomDetailPage, SolarGridView, EVChargingView, SystemView
 ```
 
 ## Tech Stack
@@ -74,6 +75,9 @@ npm run preview   # Preview production build
 - **Service calls on union types:** When `useEntity` returns a union type, service methods resolve to `never`. Use `(entity as any).service.toggle()` for the service call only.
 - **Conditional hooks:** React hooks can't be called after early returns. Use a wrapper component pattern (see `RoomDetailPage.tsx` → `RoomDetailContent`).
 - **Background image:** Served from `public/background.jpg`. AppShell applies a frosted overlay (`backdrop-filter: blur(3px)`) for readability.
+- **`@mdi/js` icon names:** Not all intuitive names exist. `mdiGarageDoor` → doesn't exist, use `mdiGarage`. Verify icon exports: `node -e "const m=require('@mdi/js');console.log(Object.keys(m).filter(k=>k.includes('Garage')))"`.
+- **`@hakit/components` cards:** `MediaPlayerCard` supports `layout="slim"` for mini player bars. Entity prop needs `as any` cast when computed dynamically. The library uses emotion CSS internally — don't wrap cards in `liquid-glass-react`.
+- **`input_select` service calls:** `(entity as any).service.select_option({ serviceData: { option: 'value' } })`. The `options` attribute contains available values: `(entity.attributes as { options?: string[] }).options`.
 
 ## Entity Configuration
 
@@ -83,6 +87,11 @@ All entity IDs are centralized in `src/config/rooms.ts`. This includes:
 - `energyEntities` — Solar, grid, phase, net metering sensors
 - `evEntities` — Tesla Raikiri and Go-e charger entities
 - `securityEntities` — Front door lock, garage doors
+- `homeEntities` — Home mode (`input_select`), notification count, active lights count
+- `calendarEntities` — 6 calendar entities for Events tab
+- `goEEntities` — Go-e charger sensors and controls (18 entities)
+- `evChargerEntities` — Custom charger mode (`input_select`), max/target amps
+- `mediaEntities` — Living Room Sonos and TV
 
 When adding new rooms or devices, update this file. Entity IDs follow the HA naming convention from the config repo: `location_room_device_sensor`.
 
@@ -98,6 +107,12 @@ When adding new rooms or devices, update this file. Entity IDs follow the HA nam
 See `docs/migration-plan.md` for the full status of the YAML → React migration.
 
 **Process:** Go view by view — user provides screenshots of the current YAML dashboard, explains interactions, then we implement the React equivalent.
+
+## Verification Tools
+
+- **Home Assistant MCP** — Use `ha_search_entities` to verify entity IDs against live HA. Always verify before adding new entity IDs to config.
+- **Playwright MCP** — Can screenshot the YAML dashboard at `http://homeassistant.local:8123`. Authenticate by injecting token into localStorage: `localStorage.setItem("hassTokens", JSON.stringify({ hassUrl, clientId, access_token, ... }))`.
+- **YAML dashboard URL pattern** — `http://homeassistant.local:8123/dashboard-home/<view>` (overview, rooms, energy, scenes, camera)
 
 ## Security
 
