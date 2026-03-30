@@ -33,14 +33,12 @@ export function HomeView() {
     return () => clearInterval(id)
   }, [])
 
-  const isDesktop = breakpoint === 'desktop'
-
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: spacing.md, alignItems: 'center' }}>
       {/* Header: greeting + notification bell */}
       <div style={{
         display: 'flex', alignItems: 'center', gap: spacing.sm,
-        width: '100%', maxWidth: isDesktop ? '780px' : '600px',
+        width: '100%', maxWidth: breakpoint === 'desktop' ? '900px' : '600px',
         justifyContent: 'space-between',
       }}>
         <GreetingCard now={now} />
@@ -48,7 +46,7 @@ export function HomeView() {
       </div>
 
       {/* Weather + Energy bar */}
-      <div style={{ width: '100%', maxWidth: isDesktop ? '780px' : '600px', display: 'flex', flexDirection: 'column', gap: spacing.sm }}>
+      <div style={{ width: '100%', maxWidth: breakpoint === 'desktop' ? '900px' : '600px', display: 'flex', flexDirection: 'column', gap: spacing.sm }}>
         <WeatherCard onClick={() => setWeatherOpen(true)} />
         <EnergyStatusBar />
       </div>
@@ -58,14 +56,14 @@ export function HomeView() {
 
       {/* Tab content */}
       {activeTab === 'home' && (
-        isDesktop ? (
+        breakpoint === 'desktop' ? (
           /* Desktop: two-column layout */
           <div className="stagger-in" style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
             gap: spacing.lg,
             width: '100%',
-            maxWidth: '780px',
+            maxWidth: '900px',
             alignItems: 'start',
           }}>
             {/* Left column: temperature chart + security */}

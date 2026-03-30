@@ -1,5 +1,6 @@
 import { useEntity, type EntityName } from '@hakit/core'
 import { evEntities } from '../../config/rooms'
+import { useBreakpoint } from '../../hooks/useBreakpoint'
 import { colors, spacing } from '../../styles/theme'
 
 export function VehicleCard() {
@@ -19,6 +20,9 @@ export function VehicleCard() {
   const limitPct = chargeLimit ? `${parseFloat(chargeLimit.state).toFixed(0)}%` : '--'
   const currentA = chargeCurrent ? `${parseFloat(chargeCurrent.state).toFixed(0)} A` : '--'
 
+  const breakpoint = useBreakpoint()
+  const gaugeSize = breakpoint === 'mobile' ? '110px' : '140px'
+
   const batteryColor = batteryPct < 20 ? colors.statusAlert : batteryPct < 50 ? '#f0c040' : colors.statusGood
 
   // SVG arc for battery gauge
@@ -30,7 +34,7 @@ export function VehicleCard() {
     <div>
       <h3 style={{ fontSize: '16px', fontWeight: 500, fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif", marginBottom: spacing.md }}>Tesla Raikiri</h3>
       <div style={{ display: 'flex', alignItems: 'center', gap: spacing.xl }}>
-        <div style={{ position: 'relative', width: '140px', height: '140px' }}>
+        <div style={{ position: 'relative', width: gaugeSize, height: gaugeSize }}>
           <svg viewBox="0 0 140 140" style={{ transform: 'rotate(135deg)' }}>
             <circle cx="70" cy="70" r={radius} fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth="8" strokeDasharray={`${circumference * 0.75} ${circumference * 0.25}`} strokeLinecap="round" />
             <circle cx="70" cy="70" r={radius} fill="none" stroke={batteryColor} strokeWidth="8" strokeDasharray={`${arcLength} ${circumference - arcLength}`} strokeLinecap="round" style={{ transition: 'stroke-dasharray 1s ease, stroke 0.5s ease' }} />

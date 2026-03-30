@@ -21,7 +21,7 @@ export function TabBar({ tabs, activeTab, onTabChange }: TabBarProps) {
         gap: '2px',
         padding: '4px 6px',
         borderRadius: borderRadius.full,
-        margin: '20px auto',
+        margin: '12px auto',
         width: 'fit-content',
       }}
     >

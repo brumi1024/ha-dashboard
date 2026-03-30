@@ -52,12 +52,15 @@ function ChargerModeSelector() {
                 cursor: 'pointer',
                 color: isActive ? colors.accentGreen : colors.textSecondary,
                 fontFamily: 'inherit',
-                fontSize: '12px',
+                fontSize: '11px',
                 fontWeight: 600,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 gap: '4px',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
               }}
             >
               <Icon path={chargerModeIcons[mode] ?? mdiPowerPlug} size={0.7} color={isActive ? colors.accentGreen : colors.textSecondary} />

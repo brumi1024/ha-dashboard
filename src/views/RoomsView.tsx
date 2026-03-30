@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { rooms } from '../config/rooms'
 import { RoomCard } from '../components/rooms/RoomCard'
 import { TabBar } from '../components/layout/TabBar'
+import { useBreakpoint } from '../hooks/useBreakpoint'
 import { spacing } from '../styles/theme'
 
 const categoryTabs = [
@@ -12,6 +13,7 @@ const categoryTabs = [
 
 export function RoomsView() {
   const [category, setCategory] = useState('main')
+  const breakpoint = useBreakpoint()
   const filteredRooms = rooms.filter((r) => r.category === category)
 
   return (
@@ -20,9 +22,9 @@ export function RoomsView() {
       <TabBar tabs={categoryTabs} activeTab={category} onTabChange={setCategory} />
       <div className="stagger-in" style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(2, 1fr)',
+        gridTemplateColumns: breakpoint === 'desktop' ? 'repeat(3, 1fr)' : 'repeat(2, 1fr)',
         gap: spacing.md,
-        maxWidth: '600px',
+        maxWidth: breakpoint === 'desktop' ? '900px' : '600px',
         margin: `${spacing.lg} auto 0`,
       }}>
         {filteredRooms.map((room) => (

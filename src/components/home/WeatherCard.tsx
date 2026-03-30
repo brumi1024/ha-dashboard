@@ -73,6 +73,7 @@ export function WeatherCard({ onClick }: WeatherCardProps) {
         flexDirection: 'column',
         gap: spacing.sm,
         cursor: onClick ? 'pointer' : undefined,
+        overflow: 'hidden',
       }}
     >
       {/* Main row */}
@@ -141,8 +142,6 @@ export function WeatherCard({ onClick }: WeatherCardProps) {
           })}
         </div>
       )}
-
-      <style>{`.hide-scrollbar::-webkit-scrollbar { display: none; }`}</style>
     </div>
   )
 }

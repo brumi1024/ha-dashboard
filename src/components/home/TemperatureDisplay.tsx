@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { useEntity, useHistory, type EntityName } from '@hakit/core'
 import { Icon } from '@mdi/react'
 import { mdiThermometer, mdiWeatherCloudy } from '@mdi/js'
@@ -40,24 +41,26 @@ export function TemperatureDisplay() {
   const indoorTemp = parseFloat(indoor.state) || 0
   const outdoorTemp = parseFloat(outdoor.state) || 0
 
-  const indoorPoints = historyToPoints(indoorHistory)
-  const outdoorPoints = historyToPoints(outdoorHistory)
+  const chartData = useMemo(() => {
+    const indoorPoints = historyToPoints(indoorHistory)
+    const outdoorPoints = historyToPoints(outdoorHistory)
 
-  const timeMap = new Map<number, { indoor?: number; outdoor?: number }>()
-  for (const [t, v] of indoorPoints) {
-    const entry = timeMap.get(t) ?? {}
-    entry.indoor = v
-    timeMap.set(t, entry)
-  }
-  for (const [t, v] of outdoorPoints) {
-    const entry = timeMap.get(t) ?? {}
-    entry.outdoor = v
-    timeMap.set(t, entry)
-  }
+    const timeMap = new Map<number, { indoor?: number; outdoor?: number }>()
+    for (const [t, v] of indoorPoints) {
+      const entry = timeMap.get(t) ?? {}
+      entry.indoor = v
+      timeMap.set(t, entry)
+    }
+    for (const [t, v] of outdoorPoints) {
+      const entry = timeMap.get(t) ?? {}
+      entry.outdoor = v
+      timeMap.set(t, entry)
+    }
 
-  const chartData = [...timeMap.entries()]
-    .sort(([a], [b]) => a - b)
-    .map(([time, vals]) => ({ time, ...vals }))
+    return [...timeMap.entries()]
+      .sort(([a], [b]) => a - b)
+      .map(([time, vals]) => ({ time, ...vals }))
+  }, [indoorHistory, outdoorHistory])
 
   return (
     <div className="liquid-glass" style={{ padding: spacing.md, width: '100%' }}>

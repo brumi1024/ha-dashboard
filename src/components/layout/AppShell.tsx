@@ -52,7 +52,7 @@ export function AppShell() {
         style={{
           position: 'relative',
           zIndex: 1,
-          maxWidth: breakpoint === 'mobile' ? '100%' : '780px',
+          maxWidth: breakpoint === 'mobile' ? '100%' : '900px',
           margin: '0 auto',
           padding: mainPadding[breakpoint],
         }}

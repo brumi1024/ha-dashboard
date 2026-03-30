@@ -82,7 +82,7 @@ const allLightEntities = rooms.flatMap(room => [
 export function ActiveEntitiesTab() {
   return (
     <div className="stagger-in" style={{ display: 'flex', flexDirection: 'column', gap: spacing.sm, width: '100%', maxWidth: '600px' }}>
-      <div><ActiveLightCount /></div>
+      <ActiveLightCount />
 
       <div className="section-label" style={{ marginTop: spacing.md }}>ENERGY</div>
       <SolarStatusCompact />

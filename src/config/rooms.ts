@@ -286,7 +286,6 @@ export const printerEntities = {
 } as const
 
 export const notificationEntities = {
-  count: 'sensor.active_notification_count',
   dishwasherState: 'sensor.dishwasher_operation_state',
   dishwasherProgress: 'sensor.dishwasher_program_progress',
   ovenState: 'sensor.oven_operation_state',

@@ -42,7 +42,6 @@ export function ScenesGrid() {
           <SceneButton key={scene.id} scene={scene} scriptService={scriptService} />
         ))}
       </div>
-      <style>{`.hide-scrollbar::-webkit-scrollbar { display: none; }`}</style>
     </div>
   )
 }
