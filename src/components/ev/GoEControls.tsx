@@ -11,7 +11,7 @@ import {
   mdiTimer,
   mdiSolarPower,
 } from '@mdi/js'
-import { colors, spacing } from '../../styles/theme'
+import { colors, spacing, borderRadius } from '../../styles/theme'
 import { AnimatedCounter } from '../shared/AnimatedCounter'
 
 const chargerModeIcons: Record<string, string> = {
@@ -37,30 +37,36 @@ function ChargerModeSelector() {
   return (
     <div className="liquid-glass" style={{ padding: spacing.md }}>
       <div className="section-label" style={{ marginBottom: spacing.sm }}>CHARGER MODE</div>
-      <div style={{ display: 'flex', gap: spacing.xs, marginBottom: spacing.md }}>
+      <div style={{
+        display: 'flex',
+        gap: '2px',
+        padding: '4px',
+        borderRadius: borderRadius.full,
+        background: 'rgba(255, 255, 255, 0.06)',
+        marginBottom: spacing.md,
+      }}>
         {options.map((mode) => {
           const isActive = currentMode === mode
           return (
             <button
               key={mode}
-              className={isActive ? 'liquid-pill liquid-pill-active' : 'liquid-pill'}
               onClick={() => handleModeChange(mode)}
               style={{
                 flex: 1,
                 padding: `${spacing.sm} ${spacing.xs}`,
+                borderRadius: borderRadius.full,
                 border: 'none',
+                background: isActive ? 'rgba(255, 255, 255, 0.12)' : 'transparent',
                 cursor: 'pointer',
                 color: isActive ? colors.accentGreen : colors.textSecondary,
                 fontFamily: 'inherit',
                 fontSize: '11px',
-                fontWeight: 600,
+                fontWeight: isActive ? 600 : 400,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 gap: '4px',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
+                transition: 'all 0.3s cubic-bezier(0.32, 0.72, 0, 1)',
               }}
             >
               <Icon path={chargerModeIcons[mode] ?? mdiPowerPlug} size={0.7} color={isActive ? colors.accentGreen : colors.textSecondary} />

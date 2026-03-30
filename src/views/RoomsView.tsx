@@ -22,7 +22,7 @@ export function RoomsView() {
       <TabBar tabs={categoryTabs} activeTab={category} onTabChange={setCategory} />
       <div className="stagger-in" style={{
         display: 'grid',
-        gridTemplateColumns: breakpoint === 'desktop' ? 'repeat(3, 1fr)' : 'repeat(2, 1fr)',
+        gridTemplateColumns: breakpoint === 'desktop' ? 'repeat(auto-fill, minmax(250px, 1fr))' : 'repeat(auto-fill, minmax(200px, 1fr))',
         gap: spacing.md,
         maxWidth: breakpoint === 'desktop' ? '900px' : '600px',
         margin: `${spacing.lg} auto 0`,

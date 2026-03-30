@@ -5,16 +5,16 @@ import { BottomSheet } from '../shared/BottomSheet'
 import { Icon } from '@mdi/react'
 import {
   mdiWeatherCloudy, mdiClose, mdiWeatherRainy,
-  mdiWeatherWindy, mdiWhiteBalanceSunny, mdiMoonWaningCrescent,
+  mdiWeatherWindy, mdiWhiteBalanceSunny,
 } from '@mdi/js'
 import {
-  AreaChart, Area, BarChart, Bar, LineChart, Line,
+  AreaChart, Area, Bar, Line,
   XAxis, YAxis, Tooltip, ResponsiveContainer, ComposedChart,
   CartesianGrid,
 } from 'recharts'
 import { weatherEntity } from '../../config/rooms'
 import { useForecast, type ForecastItem } from '../../hooks/useForecast'
-import { conditionIcons, formatCondition } from './WeatherCard'
+import { conditionIcons } from './WeatherCard'
 import { colors, spacing } from '../../styles/theme'
 
 interface WeatherDetailPanelProps {
@@ -45,11 +45,6 @@ function formatHour(datetime: string): string {
 function formatDay(datetime: string): string {
   const d = new Date(datetime)
   return d.toLocaleDateString('en-US', { weekday: 'short' })
-}
-
-function formatDayDate(datetime: string): string {
-  const d = new Date(datetime)
-  return d.toLocaleDateString('en-US', { weekday: 'short', day: 'numeric' })
 }
 
 /* ─── Forecast Tab ─── */

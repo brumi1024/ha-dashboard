@@ -33,45 +33,47 @@ export function HomeView() {
     return () => clearInterval(id)
   }, [])
 
+  const isDesktop = breakpoint === 'desktop'
+  const maxW = isDesktop ? '1100px' : '600px'
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: spacing.md, alignItems: 'center' }}>
       {/* Header: greeting + notification bell */}
       <div style={{
         display: 'flex', alignItems: 'center', gap: spacing.sm,
-        width: '100%', maxWidth: breakpoint === 'desktop' ? '900px' : '600px',
+        width: '100%', maxWidth: maxW,
         justifyContent: 'space-between',
       }}>
         <GreetingCard now={now} />
         <NotificationBadge onClick={() => setNotifOpen(true)} />
       </div>
 
-      {/* Weather + Energy bar */}
-      <div style={{ width: '100%', maxWidth: breakpoint === 'desktop' ? '900px' : '600px', display: 'flex', flexDirection: 'column', gap: spacing.sm }}>
-        <WeatherCard onClick={() => setWeatherOpen(true)} />
-        <EnergyStatusBar />
-      </div>
-
-      {/* Tab bar */}
+      {/* Tab bar — moved up, right after greeting */}
       <TabBar tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
 
       {/* Tab content */}
       {activeTab === 'home' && (
-        breakpoint === 'desktop' ? (
-          /* Desktop: two-column layout */
+        isDesktop ? (
+          /* Desktop: bento grid layout */
           <div className="stagger-in" style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
-            gap: spacing.lg,
+            gap: spacing.md,
             width: '100%',
-            maxWidth: '900px',
+            maxWidth: maxW,
             alignItems: 'start',
           }}>
-            {/* Left column: temperature chart + security */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: spacing.lg }}>
-              <TemperatureDisplay />
-              <SecurityControls />
+            {/* Row 1: Weather + Security side by side */}
+            <WeatherCard onClick={() => setWeatherOpen(true)} />
+            <SecurityControls />
+
+            {/* Row 2: Energy bar spans full width */}
+            <div style={{ gridColumn: '1 / -1' }}>
+              <EnergyStatusBar />
             </div>
-            {/* Right column: modes + scenes */}
+
+            {/* Row 3: Temperature chart + Modes/Scenes */}
+            <TemperatureDisplay />
             <div style={{ display: 'flex', flexDirection: 'column', gap: spacing.lg }}>
               <ModesSection />
               <ScenesGrid />
@@ -80,13 +82,15 @@ export function HomeView() {
         ) : (
           /* Mobile/Tablet: single column */
           <div className="stagger-in" style={{
-            display: 'flex', flexDirection: 'column', gap: spacing.lg,
+            display: 'flex', flexDirection: 'column', gap: spacing.md,
             width: '100%', maxWidth: '600px',
           }}>
+            <WeatherCard onClick={() => setWeatherOpen(true)} />
+            <EnergyStatusBar />
+            <SecurityControls />
             <ModesSection />
             <TemperatureDisplay />
             <ScenesGrid />
-            <SecurityControls />
           </div>
         )
       )}

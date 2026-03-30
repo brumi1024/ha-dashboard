@@ -30,6 +30,9 @@ function CalendarEntry({ entityId }: { entityId: typeof calendarEntities[number]
   }
 
   const isActive = entity.state === 'on'
+
+  if (!isActive) return null
+
   const icon = calendarIcons[entityId]
   const name = calendarNames[entityId]
 
@@ -57,27 +60,45 @@ function CalendarEntry({ entityId }: { entityId: typeof calendarEntities[number]
       <Icon
         path={icon}
         size={0.8}
-        color={isActive ? colors.accentBlue : colors.textMuted}
+        color={colors.accentBlue}
       />
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ fontSize: '13px', color: colors.textSecondary, marginBottom: '2px' }}>
           {name}
         </div>
-        {isActive && attrs.message ? (
-          <div style={{ fontSize: '15px', color: colors.textPrimary, fontWeight: 500 }}>
-            {attrs.message}
-          </div>
-        ) : (
-          <div style={{ fontSize: '13px', color: colors.textMuted }}>
-            No upcoming events
-          </div>
-        )}
-        {isActive && formattedTime && (
+        <div style={{ fontSize: '15px', color: colors.textPrimary, fontWeight: 500 }}>
+          {attrs.message}
+        </div>
+        {formattedTime && (
           <div style={{ fontSize: '12px', color: colors.textMuted, marginTop: '2px' }}>
             {formattedTime}
           </div>
         )}
       </div>
+    </div>
+  )
+}
+
+function NoEventsMessage() {
+  const states = calendarEntities.map((id) =>
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEntity(id as EntityName, { returnNullIfNotFound: true })
+  )
+  const anyActive = states.some((e) => e?.state === 'on')
+  if (anyActive) return null
+
+  return (
+    <div className="liquid-glass" style={{
+      padding: `${spacing.lg} ${spacing.md}`,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: spacing.sm,
+      textAlign: 'center',
+    }}>
+      <Icon path={mdiCalendar} size={1.5} color={colors.textMuted} />
+      <div style={{ fontSize: '15px', color: colors.textSecondary }}>No upcoming events</div>
+      <div style={{ fontSize: '12px', color: colors.textMuted }}>Your calendars are clear</div>
     </div>
   )
 }
@@ -89,6 +110,7 @@ export function EventsTab() {
       {calendarEntities.map((entityId) => (
         <CalendarEntry key={entityId} entityId={entityId} />
       ))}
+      <NoEventsMessage />
     </div>
   )
 }
