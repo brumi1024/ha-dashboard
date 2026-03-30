@@ -1,3 +1,8 @@
+const amber = '#FFD60A' as const
+const tealHex = '#64D2FF' as const
+const red = '#FF453A' as const
+const green = '#30D158' as const
+
 export const colors = {
   // Background
   bgBase: '#0a1a12',
@@ -28,37 +33,37 @@ export const colors = {
   textMuted: 'rgba(255, 255, 255, 0.35)',
 
   // Accents — Apple system colors
-  amber: '#FFD60A',
+  amber,
   amberSoft: 'rgba(255, 214, 10, 0.15)',
   amberGlow: 'rgba(255, 214, 10, 0.25)',
-  teal: '#64D2FF',
+  teal: tealHex,
   tealSoft: 'rgba(100, 210, 255, 0.12)',
 
   // Status
-  statusOn: '#FFD60A',
+  statusOn: amber,
   statusOff: 'rgba(255, 255, 255, 0.06)',
-  statusAlert: '#FF453A',
+  statusAlert: red,
   statusAlertSoft: 'rgba(255, 69, 58, 0.12)',
-  statusGood: '#30D158',
+  statusGood: green,
   statusGoodSoft: 'rgba(48, 209, 88, 0.12)',
 
   // Energy
-  solarYellow: '#FFD60A',
-  gridImport: '#FF453A',
+  solarYellow: amber,
+  gridImport: red,
   gridExport: '#BF5AF2',
-  phaseA: '#FF453A',
+  phaseA: red,
   phaseB: '#0A84FF',
-  phaseC: '#30D158',
+  phaseC: green,
 
   // Sidebar
   sidebarBg: 'rgba(10, 26, 18, 0.75)',
   sidebarActive: 'rgba(255, 255, 255, 0.08)',
 
   // Accent aliases for component use
-  accentAmber: '#FFD60A',
-  accentGreen: '#30D158',
-  accentBlue: '#64D2FF',
-  accentRed: '#FF453A',
+  accentAmber: amber,
+  accentGreen: green,
+  accentBlue: tealHex,
+  accentRed: red,
 } as const
 
 export const spacing = {

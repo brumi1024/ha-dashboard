@@ -236,6 +236,15 @@ export const calendarEntities = [
   'calendar.mvm_next',
 ] as const
 
+export const calendarNames: Record<typeof calendarEntities[number], string> = {
+  'calendar.benjamin_s_calendar': "Benjamin's Calendar",
+  'calendar.birthdays': 'Birthdays',
+  'calendar.privat': 'Private',
+  'calendar.bteke_cloudera_com': 'Work',
+  'calendar.holidays_in_hungary': 'Holidays',
+  'calendar.mvm_next': 'MVM Next',
+}
+
 export const goEEntities = {
   carConnected: 'binary_sensor.goe_249593_car_0',
   carState: 'sensor.goe_249593_car_value',
@@ -266,4 +275,21 @@ export const evChargerEntities = {
 export const mediaEntities = {
   livingRoomSonos: 'media_player.living_room_sonos',
   livingRoomTV: 'media_player.living_room_tv',
+} as const
+
+export const systemEntities = {
+  coreUpdate: 'update.home_assistant_core_update',
+  osUpdate: 'update.home_assistant_operating_system_update',
+  supervisorUpdate: 'update.home_assistant_supervisor_update',
+  trackedUpdates: [
+    'update.tailscale_update',
+    'update.mosquitto_broker_update',
+    'update.studio_code_server_update',
+    'update.matter_server_update',
+    'update.advanced_ssh_web_terminal_update',
+    'update.openthread_border_router_update',
+    'update.get_hacs_update',
+    'update.browser_mod_update',
+    'update.adaptive_lighting_update',
+  ],
 } as const

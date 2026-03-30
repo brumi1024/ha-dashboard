@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { useEntity } from '@hakit/core'
 import type { EntityName } from '@hakit/core'
 import { MediaPlayerCard } from '@hakit/components'
@@ -7,12 +8,13 @@ export function MediaPlayerBar() {
   const sonos = useEntity(mediaEntities.livingRoomSonos as EntityName, { returnNullIfNotFound: true })
   const tv = useEntity(mediaEntities.livingRoomTV as EntityName, { returnNullIfNotFound: true })
 
-  // Show the one that's currently playing, prefer Sonos
-  const activeEntity = sonos?.state === 'playing' ? mediaEntities.livingRoomSonos
-    : tv?.state === 'playing' ? mediaEntities.livingRoomTV
-    : sonos?.state === 'paused' ? mediaEntities.livingRoomSonos
-    : tv?.state === 'paused' ? mediaEntities.livingRoomTV
-    : null
+  const activeEntity = useMemo(() => {
+    if (sonos?.state === 'playing') return mediaEntities.livingRoomSonos
+    if (tv?.state === 'playing') return mediaEntities.livingRoomTV
+    if (sonos?.state === 'paused') return mediaEntities.livingRoomSonos
+    if (tv?.state === 'paused') return mediaEntities.livingRoomTV
+    return null
+  }, [sonos?.state, tv?.state])
 
   if (!activeEntity) return null
 

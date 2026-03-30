@@ -69,17 +69,12 @@ function ActiveLightCount() {
   )
 }
 
-export function ActiveEntitiesTab() {
-  const allLightEntities: { entityId: string; roomName: string }[] = []
-  for (const room of rooms) {
-    for (const lightId of room.lights) {
-      allLightEntities.push({ entityId: lightId, roomName: room.name })
-    }
-    for (const switchId of room.switches) {
-      allLightEntities.push({ entityId: switchId, roomName: room.name })
-    }
-  }
+const allLightEntities = rooms.flatMap(room => [
+  ...room.lights.map(entityId => ({ entityId, roomName: room.name })),
+  ...room.switches.map(entityId => ({ entityId, roomName: room.name })),
+])
 
+export function ActiveEntitiesTab() {
   return (
     <div className="stagger-in" style={{ display: 'flex', flexDirection: 'column', gap: spacing.sm, width: '100%', maxWidth: '600px' }}>
       <ActiveLightCount />

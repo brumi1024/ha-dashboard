@@ -19,7 +19,6 @@ export function NotificationBadge() {
         alignItems: 'center',
         gap: spacing.xs,
         padding: `${spacing.xs} ${spacing.sm}`,
-        cursor: 'pointer',
       }}
     >
       <Icon path={mdiBellOutline} size={0.7} color={colors.accentAmber} />

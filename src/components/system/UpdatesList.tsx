@@ -2,19 +2,8 @@ import { useEntity } from '@hakit/core'
 import type { EntityName } from '@hakit/core'
 import { Icon } from '@mdi/react'
 import { mdiUpdate, mdiCheck } from '@mdi/js'
+import { systemEntities } from '../../config/rooms'
 import { colors, spacing } from '../../styles/theme'
-
-const trackedUpdates = [
-  'update.tailscale_update',
-  'update.mosquitto_broker_update',
-  'update.studio_code_server_update',
-  'update.matter_server_update',
-  'update.advanced_ssh_web_terminal_update',
-  'update.openthread_border_router_update',
-  'update.get_hacs_update',
-  'update.browser_mod_update',
-  'update.adaptive_lighting_update',
-]
 
 function UpdateEntry({ entityId }: { entityId: string }) {
   const entity = useEntity(entityId as EntityName, { returnNullIfNotFound: true })
@@ -59,7 +48,7 @@ export function UpdatesList() {
     <div>
       <div className="section-label" style={{ marginBottom: spacing.sm }}>ADD-ONS & INTEGRATIONS</div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: spacing.xs }}>
-        {trackedUpdates.map((entityId) => (
+        {systemEntities.trackedUpdates.map((entityId) => (
           <UpdateEntry key={entityId} entityId={entityId} />
         ))}
       </div>

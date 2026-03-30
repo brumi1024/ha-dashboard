@@ -1,11 +1,12 @@
+import { useMemo } from 'react'
 import { useEntity } from '@hakit/core'
 import type { EntityName } from '@hakit/core'
-import { calendarEntities } from '../../config/rooms'
+import { calendarEntities, calendarNames } from '../../config/rooms'
 import { Icon } from '@mdi/react'
 import { mdiCalendar, mdiCalendarStar, mdiBriefcase, mdiCake, mdiCalendarHeart } from '@mdi/js'
 import { colors, spacing } from '../../styles/theme'
 
-const calendarIcons: Record<string, string> = {
+const calendarIcons: Record<typeof calendarEntities[number], string> = {
   'calendar.benjamin_s_calendar': mdiCalendar,
   'calendar.birthdays': mdiCake,
   'calendar.privat': mdiCalendarHeart,
@@ -14,16 +15,7 @@ const calendarIcons: Record<string, string> = {
   'calendar.mvm_next': mdiCalendar,
 }
 
-const calendarNames: Record<string, string> = {
-  'calendar.benjamin_s_calendar': "Benjamin's Calendar",
-  'calendar.birthdays': 'Birthdays',
-  'calendar.privat': 'Private',
-  'calendar.bteke_cloudera_com': 'Work',
-  'calendar.holidays_in_hungary': 'Holidays',
-  'calendar.mvm_next': 'MVM Next',
-}
-
-function CalendarEntry({ entityId }: { entityId: string }) {
+function CalendarEntry({ entityId }: { entityId: typeof calendarEntities[number] }) {
   const entity = useEntity(entityId as EntityName, { returnNullIfNotFound: true })
 
   if (!entity) return null
@@ -38,8 +30,19 @@ function CalendarEntry({ entityId }: { entityId: string }) {
   }
 
   const isActive = entity.state === 'on'
-  const icon = calendarIcons[entityId] ?? mdiCalendar
-  const name = calendarNames[entityId] ?? attrs.friendly_name ?? entityId
+  const icon = calendarIcons[entityId]
+  const name = calendarNames[entityId]
+
+  const formattedTime = useMemo(() => {
+    if (!attrs.start_time) return null
+    return new Date(attrs.start_time).toLocaleString('en-US', {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+    })
+  }, [attrs.start_time])
 
   return (
     <div
@@ -69,15 +72,9 @@ function CalendarEntry({ entityId }: { entityId: string }) {
             No upcoming events
           </div>
         )}
-        {isActive && attrs.start_time && (
+        {isActive && formattedTime && (
           <div style={{ fontSize: '12px', color: colors.textMuted, marginTop: '2px' }}>
-            {new Date(attrs.start_time).toLocaleString('en-US', {
-              weekday: 'short',
-              month: 'short',
-              day: 'numeric',
-              hour: 'numeric',
-              minute: '2-digit',
-            })}
+            {formattedTime}
           </div>
         )}
       </div>

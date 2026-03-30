@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { WeatherBadge } from '../components/home/WeatherBadge'
 import { GreetingCard } from '../components/home/GreetingCard'
 import { TemperatureDisplay } from '../components/home/TemperatureDisplay'
@@ -19,7 +19,11 @@ const tabs = [
 
 export function HomeView() {
   const [activeTab, setActiveTab] = useState('home')
-  const now = new Date()
+  const [now, setNow] = useState(() => new Date())
+  useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), 30_000)
+    return () => clearInterval(id)
+  }, [])
   const dateStr = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })
   const timeStr = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })
 
