@@ -319,3 +319,49 @@ body {
   background: rgba(48, 209, 88, 0.3);
   color: var(--text-primary);
 }
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+/* Tablet: sidebar hidden, bottom tab bar shown */
+@media (max-width: 1024px) {
+  .sidebar-desktop {
+    display: none !important;
+  }
+
+  .bottom-tab-bar {
+    display: flex !important;
+  }
+}
+
+/* Desktop: sidebar visible, bottom tab bar hidden */
+@media (min-width: 1025px) {
+  .bottom-tab-bar {
+    display: none !important;
+  }
+}
+
+/* Mobile: tighter spacing, reduced blur for GPU performance */
+@media (max-width: 639px) {
+  .liquid-glass {
+    backdrop-filter: blur(20px) saturate(1.6);
+    -webkit-backdrop-filter: blur(20px) saturate(1.6);
+    border-radius: var(--radius-md);
+  }
+
+  .liquid-glass-prominent {
+    backdrop-filter: blur(25px) saturate(1.6);
+    -webkit-backdrop-filter: blur(25px) saturate(1.6);
+    border-radius: var(--radius-lg);
+  }
+
+  .liquid-pill {
+    backdrop-filter: blur(15px) saturate(1.4);
+    -webkit-backdrop-filter: blur(15px) saturate(1.4);
+  }
+
+  .page-title {
+    font-size: 22px;
+  }
+}

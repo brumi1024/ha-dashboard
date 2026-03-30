@@ -1,11 +1,15 @@
 import { useEntity, type EntityName } from '@hakit/core'
 import { colors, spacing } from '../../styles/theme'
 
-export function GreetingCard() {
+interface GreetingCardProps {
+  now: Date
+}
+
+export function GreetingCard({ now = new Date() }: GreetingCardProps) {
   const person = useEntity('person.benjamin' as EntityName)
   const isHome = person.state === 'home'
 
-  const hour = new Date().getHours()
+  const hour = now.getHours()
   let greeting: string
   if (hour >= 22 || hour < 5) greeting = 'Good Night'
   else if (hour >= 18) greeting = 'Good Evening'
@@ -13,6 +17,10 @@ export function GreetingCard() {
   else greeting = 'Good Morning'
 
   const name = person.attributes.friendly_name || 'Benjamin'
+
+  const dateStr = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })
+  const timeStr = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })
+  const subtitle = `${isHome ? 'Home' : 'Away'} \u00B7 ${dateStr} - ${timeStr}`
 
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: spacing.md, padding: `${spacing.md} 0` }}>
@@ -27,7 +35,7 @@ export function GreetingCard() {
       </div>
       <div>
         <div style={{ fontSize: '24px', fontWeight: 700, letterSpacing: '-0.02em', fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif" }}>{greeting}, {name}!</div>
-        <div style={{ fontSize: '13px', color: colors.textSecondary }}>{isHome ? 'Home' : 'Away'}</div>
+        <div style={{ fontSize: '13px', color: colors.textSecondary }}>{subtitle}</div>
       </div>
     </div>
   )

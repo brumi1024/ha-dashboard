@@ -9,6 +9,11 @@ import {
   mdiLockOpen,
 } from '@mdi/js'
 import { colors, spacing } from '../../styles/theme'
+import { SolarStatusCompact } from './active/SolarStatusCompact'
+import { EnergyFlowPills } from './active/EnergyFlowPills'
+import { EVStatusCompact } from './active/EVStatusCompact'
+import { PrinterStatus } from './active/PrinterStatus'
+import { AppliancesStatus } from './active/AppliancesStatus'
 
 function LightStatus({ entityId, roomName }: { entityId: string; roomName: string }) {
   const entity = useEntity(entityId as EntityName, { returnNullIfNotFound: true })
@@ -77,7 +82,16 @@ const allLightEntities = rooms.flatMap(room => [
 export function ActiveEntitiesTab() {
   return (
     <div className="stagger-in" style={{ display: 'flex', flexDirection: 'column', gap: spacing.sm, width: '100%', maxWidth: '600px' }}>
-      <ActiveLightCount />
+      <div><ActiveLightCount /></div>
+
+      <div className="section-label" style={{ marginTop: spacing.md }}>ENERGY</div>
+      <SolarStatusCompact />
+      <EnergyFlowPills />
+
+      <div className="section-label" style={{ marginTop: spacing.md }}>DEVICES</div>
+      <EVStatusCompact />
+      <PrinterStatus />
+      <AppliancesStatus />
 
       <div className="section-label" style={{ marginTop: spacing.md }}>SECURITY</div>
       <SecurityEntityStatus entityId={securityEntities.frontDoorLock} icon={mdiLockOpen} label="Front Door" />

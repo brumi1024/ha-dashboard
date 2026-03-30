@@ -1,7 +1,9 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Sidebar } from './Sidebar'
+import { BottomTabBar } from './BottomTabBar'
 import { MediaPlayerBar } from './MediaPlayerBar'
+import { useBreakpoint } from '../../hooks/useBreakpoint'
 import { colors } from '../../styles/theme'
 
 const springTransition = {
@@ -11,8 +13,15 @@ const springTransition = {
   mass: 0.8,
 }
 
+const mainPadding = {
+  desktop: '44px 48px 60px 110px',
+  tablet: '24px 24px 80px 24px',
+  mobile: '16px 16px 80px 16px',
+}
+
 export function AppShell() {
   const location = useLocation()
+  const breakpoint = useBreakpoint()
 
   return (
     <div
@@ -20,7 +29,6 @@ export function AppShell() {
         minHeight: '100vh',
         background: `url('/background.jpg') center / cover no-repeat fixed`,
         color: colors.textPrimary,
-        fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif",
         position: 'relative',
       }}
     >
@@ -38,14 +46,15 @@ export function AppShell() {
       />
 
       <Sidebar />
+      <BottomTabBar />
       <MediaPlayerBar />
       <main
         style={{
           position: 'relative',
           zIndex: 1,
-          maxWidth: '780px',
+          maxWidth: breakpoint === 'mobile' ? '100%' : '780px',
           margin: '0 auto',
-          padding: '44px 48px 60px 110px',
+          padding: mainPadding[breakpoint],
         }}
       >
         <AnimatePresence mode="wait">

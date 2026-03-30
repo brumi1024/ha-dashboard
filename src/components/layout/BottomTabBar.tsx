@@ -1,32 +1,24 @@
 import { Icon } from '@mdi/react'
-import { mdiHome, mdiFloorPlan, mdiSolarPower, mdiCarElectric, mdiCogOutline, mdiDotsHorizontal } from '@mdi/js'
 import { NavLink } from 'react-router-dom'
+import { navItems } from './Sidebar'
 import { colors, borderRadius } from '../../styles/theme'
 
-export const navItems = [
-  { to: '/', icon: mdiHome, label: 'Home' },
-  { to: '/rooms', icon: mdiFloorPlan, label: 'Rooms' },
-  { to: '/energy/solar', icon: mdiSolarPower, label: 'Energy' },
-  { to: '/energy/ev', icon: mdiCarElectric, label: 'EV' },
-  { to: '/system', icon: mdiCogOutline, label: 'System' },
-  { to: '/more', icon: mdiDotsHorizontal, label: 'More' },
-]
-
-export function Sidebar() {
+export function BottomTabBar() {
   return (
     <nav
-      className="liquid-glass sidebar-desktop"
+      className="liquid-glass bottom-tab-bar"
       style={{
         position: 'fixed',
-        left: '14px',
-        top: '50%',
-        transform: 'translateY(-50%)',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '2px',
-        padding: '14px 6px',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        display: 'none',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        padding: '8px 4px',
+        paddingBottom: 'calc(8px + env(safe-area-inset-bottom, 0px))',
         zIndex: 100,
-        borderRadius: borderRadius.xl,
+        borderRadius: '22px 22px 0 0',
       }}
     >
       {navItems.map(({ to, icon, label }) => (
@@ -37,8 +29,8 @@ export function Sidebar() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '3px',
-            padding: '10px 14px',
+            gap: '2px',
+            padding: '6px 12px',
             borderRadius: borderRadius.md,
             textDecoration: 'none',
             color: isActive ? colors.textPrimary : colors.textMuted,

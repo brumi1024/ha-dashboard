@@ -277,6 +277,30 @@ export const mediaEntities = {
   livingRoomTV: 'media_player.living_room_tv',
 } as const
 
+export const weatherEntity = 'weather.forecast_home' as const
+
+export const printerEntities = {
+  status: 'input_select.printer_3d_status',
+  printProgress: 'sensor.x1c_00m00a2b0805242_print_progress',
+  camera: 'camera.x1c_00m00a2b0805242_camera',
+} as const
+
+export const notificationEntities = {
+  count: 'sensor.active_notification_count',
+  dishwasherState: 'sensor.dishwasher_operation_state',
+  dishwasherProgress: 'sensor.dishwasher_program_progress',
+  ovenState: 'sensor.oven_operation_state',
+  ovenTemp: 'sensor.oven_current_oven_cavity_temperature',
+  openWindows: 'sensor.open_windows_count',
+  openDoors: 'sensor.open_doors_count',
+  co2Bedroom: 'sensor.master_bedroom_air_quality_monitor_carbon_dioxide',
+  serverIssues: 'sensor.server_issues_count',
+  dhwHeaterPower: 'sensor.dhw_aux_heater_switch_power',
+  dhwPumpBoost: 'input_boolean.dhw_pump_boost',
+  leftGarageDoorSensor: 'binary_sensor.left_garage_door_sensor_door',
+  rightGarageDoorSensor: 'binary_sensor.myggbett_door_window_sensor_door',
+} as const
+
 export const systemEntities = {
   coreUpdate: 'update.home_assistant_core_update',
   osUpdate: 'update.home_assistant_operating_system_update',
