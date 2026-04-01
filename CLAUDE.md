@@ -76,7 +76,12 @@ npm run preview   # Preview production build
 - **Conditional hooks:** React hooks can't be called after early returns. Use a wrapper component pattern (see `RoomDetailPage.tsx` → `RoomDetailContent`).
 - **Background image:** Served from `public/background.jpg`. AppShell applies a frosted overlay (`backdrop-filter: blur(3px)`) for readability.
 - **`@mdi/js` icon names:** Not all intuitive names exist. `mdiGarageDoor` → doesn't exist, use `mdiGarage`. Verify icon exports: `node -e "const m=require('@mdi/js');console.log(Object.keys(m).filter(k=>k.includes('Garage')))"`.
-- **`@hakit/components` cards:** `MediaPlayerCard` supports `layout="slim"` for mini player bars. Entity prop needs `as any` cast when computed dynamically. The library uses emotion CSS internally — don't wrap cards in `liquid-glass-react`.
+- **`@hakit/components` cards:** Pre-built cards (ClimateCard, etc.) use emotion CSS — don't wrap in `liquid-glass-react`. `MediaPlayerCard` was replaced with a custom `MediaPlayerBar` that uses `useHass().entities` for dynamic player discovery.
+- **`useHass()` structure:** `callService` and `joinHassUrl` live under `hass.helpers`, not at the top level. `hass.hassUrl` (string) and `hass.connection` (WS connection) are top-level. Destructuring `const { callService } = useHass()` silently returns `undefined`.
+- **Direct WS service calls:** For dynamic entity targets, use `callService` from `home-assistant-js-websocket` directly: `wsCallService(hass.connection, 'media_player', 'volume_set', { volume_level: 0.5 }, { entity_id: '...' })`. The `@hakit/core` wrapper can silently drop `serviceData` when cast through `any`.
+- **HA entity_picture URLs:** These are relative paths (`/api/media_player_proxy/...`). Build full URLs with `${hassUrl}${entity_picture}`. The `joinHassUrl` helper from `hass.helpers` also works but its reference may be unstable for `useMemo` deps.
+- **LG WebOS TV state:** LG TVs report `"on"` instead of `"playing"` — check for both when detecting active media.
+- **Tesla media_player:** `media_player.raikiri_media_player` has `device_class: "speaker"` despite being a car. It errors with `user_not_present` when not near. Excluded via `excludedMediaPlayerPatterns` in `config/rooms.ts`.
 - **`input_select` service calls:** `(entity as any).service.select_option({ serviceData: { option: 'value' } })`. The `options` attribute contains available values: `(entity.attributes as { options?: string[] }).options`.
 
 ## Entity Configuration
@@ -91,7 +96,8 @@ All entity IDs are centralized in `src/config/rooms.ts`. This includes:
 - `calendarEntities` — 6 calendar entities for Events tab
 - `goEEntities` — Go-e charger sensors and controls (18 entities)
 - `evChargerEntities` — Custom charger mode (`input_select`), max/target amps
-- `mediaEntities` — Living Room Sonos and TV
+- `mediaEntities` — Living Room Sonos and TV (used by other components; MediaPlayerBar discovers players dynamically)
+- `excludedMediaPlayerPatterns` — Entity ID substrings to exclude from the media player bar (e.g., vehicle players)
 
 When adding new rooms or devices, update this file. Entity IDs follow the HA naming convention from the config repo: `location_room_device_sensor`.
 

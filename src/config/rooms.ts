@@ -277,6 +277,9 @@ export const mediaEntities = {
   livingRoomTV: 'media_player.living_room_tv',
 } as const
 
+/** Entity ID substrings to exclude from the media player bar (e.g., vehicle media players) */
+export const excludedMediaPlayerPatterns = ['raikiri', 'tesla'] as const
+
 export const weatherEntity = 'weather.forecast_home' as const
 
 export const printerEntities = {
