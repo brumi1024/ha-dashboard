@@ -49,7 +49,7 @@ function RoomDetailContent({ room, activeTab, setActiveTab, navigate }: {
         ← Back
       </button>
 
-      <h1 style={{ textAlign: 'center', fontSize: '28px', fontWeight: 700, letterSpacing: '-0.02em', fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif" }}>{room.name}</h1>
+      <h1 style={{ textAlign: 'center', fontSize: '28px', fontWeight: 700, letterSpacing: '-0.02em' }}>{room.name}</h1>
 
       <div style={{ display: 'flex', gap: spacing.sm, justifyContent: 'center', margin: `${spacing.md} 0` }}>
         {temp && <StatBadge icon="🌡" value={`${parseFloat(temp.state).toFixed(1)}°C`} />}

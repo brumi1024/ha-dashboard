@@ -15,8 +15,8 @@ const springTransition = {
 
 const mainPadding = {
   desktop: '44px 48px 60px 110px',
-  tablet: '24px 24px 80px 24px',
-  mobile: '16px 16px 80px 16px',
+  tablet: '24px 24px 150px 24px',
+  mobile: '16px 16px 150px 16px',
 }
 
 export function AppShell() {

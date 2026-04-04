@@ -59,7 +59,6 @@ function ChargerModeSelector() {
                 background: isActive ? 'rgba(255, 255, 255, 0.12)' : 'transparent',
                 cursor: 'pointer',
                 color: isActive ? colors.accentGreen : colors.textSecondary,
-                fontFamily: 'inherit',
                 fontSize: '11px',
                 fontWeight: isActive ? 600 : 400,
                 display: 'flex',

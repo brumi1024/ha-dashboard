@@ -10,7 +10,7 @@ export function ProductionStats() {
 
   return (
     <div>
-      <h3 style={{ fontSize: '16px', fontWeight: 500, fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif", marginBottom: spacing.md }}>Production</h3>
+      <h3 style={{ fontSize: '16px', fontWeight: 500, marginBottom: spacing.md }}>Production</h3>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: spacing.md, marginBottom: spacing.lg }}>
         <div>
           <div style={{ fontSize: '12px', color: colors.textSecondary }}>Today</div>
@@ -21,7 +21,7 @@ export function ProductionStats() {
           <div style={{ fontSize: '16px', fontWeight: 500 }}>{monthly ? `${parseFloat(monthly.state).toFixed(1)} kWh` : '--'}</div>
         </div>
       </div>
-      <h3 style={{ fontSize: '16px', fontWeight: 500, fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif", marginBottom: spacing.md }}>Forecast</h3>
+      <h3 style={{ fontSize: '16px', fontWeight: 500, marginBottom: spacing.md }}>Forecast</h3>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: spacing.md }}>
         <div>
           <div style={{ fontSize: '12px', color: colors.textSecondary }}>Today</div>

@@ -21,7 +21,7 @@ export function AmperageSection() {
 
   return (
     <div>
-      <h3 style={{ fontSize: '16px', fontWeight: 500, fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif", marginBottom: spacing.md }}>Amperage</h3>
+      <h3 style={{ fontSize: '16px', fontWeight: 500, marginBottom: spacing.md }}>Amperage</h3>
       <div style={{ display: 'flex', gap: spacing.lg, marginBottom: spacing.md }}>
         {phases.map((phase) => (
           <div key={phase.name} style={{ flex: 1 }}>

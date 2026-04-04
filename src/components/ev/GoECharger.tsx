@@ -10,7 +10,7 @@ export function GoECharger() {
 
   return (
     <div>
-      <h3 style={{ fontSize: '16px', fontWeight: 500, fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif", marginBottom: spacing.md }}>Go-e Charger</h3>
+      <h3 style={{ fontSize: '16px', fontWeight: 500, marginBottom: spacing.md }}>Go-e Charger</h3>
       <div style={{ display: 'flex', alignItems: 'center', gap: spacing.md, marginBottom: spacing.md }}>
         <span style={{ fontSize: '20px' }}>🔌</span>
         <div>

@@ -7,7 +7,7 @@ export function ChargerMode() {
   if (!chargerMode) {
     return (
       <div>
-        <h3 style={{ fontSize: '16px', fontWeight: 500, fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif", marginBottom: spacing.md }}>Charger Mode</h3>
+        <h3 style={{ fontSize: '16px', fontWeight: 500, marginBottom: spacing.md }}>Charger Mode</h3>
         <p style={{ fontSize: '13px', color: colors.textSecondary }}>Charger mode entity not found. Check entity ID configuration.</p>
       </div>
     )
@@ -18,7 +18,7 @@ export function ChargerMode() {
 
   return (
     <div>
-      <h3 style={{ fontSize: '16px', fontWeight: 500, fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif", marginBottom: spacing.md }}>Charger Mode</h3>
+      <h3 style={{ fontSize: '16px', fontWeight: 500, marginBottom: spacing.md }}>Charger Mode</h3>
       <div style={{ fontSize: '13px', color: colors.textSecondary, marginBottom: spacing.sm }}>EV Charger Mode</div>
       <select className="liquid-glass" value={currentMode} onChange={(e) => (chargerMode as any).service.select_option({ option: e.target.value })} style={{
         width: '100%', padding: `${spacing.sm} ${spacing.md}`,

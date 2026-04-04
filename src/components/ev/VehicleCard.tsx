@@ -32,7 +32,7 @@ export function VehicleCard() {
 
   return (
     <div>
-      <h3 style={{ fontSize: '16px', fontWeight: 500, fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif", marginBottom: spacing.md }}>Tesla Raikiri</h3>
+      <h3 style={{ fontSize: '16px', fontWeight: 500, marginBottom: spacing.md }}>Tesla Raikiri</h3>
       <div style={{ display: 'flex', alignItems: 'center', gap: spacing.xl }}>
         <div style={{ position: 'relative', width: gaugeSize, height: gaugeSize }}>
           <svg viewBox="0 0 140 140" style={{ transform: 'rotate(135deg)' }}>

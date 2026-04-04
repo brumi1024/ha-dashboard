@@ -9,6 +9,8 @@ export interface RoomConfig {
   lights: string[]
   switches: string[]
   appliances: ApplianceConfig[]
+  media: string[]
+  sensors: SensorConfig[]
 }
 
 export interface ApplianceConfig {
@@ -16,6 +18,15 @@ export interface ApplianceConfig {
   icon: string
   entity: string
   statusEntity?: string
+  type?: 'dishwasher' | 'oven' | 'fridge' | 'hob' | 'printer' | 'generic'
+  entities?: Record<string, string>
+}
+
+export interface SensorConfig {
+  name: string
+  entity: string
+  icon: string
+  unit?: string
 }
 
 export const rooms: RoomConfig[] = [
@@ -30,11 +41,84 @@ export const rooms: RoomConfig[] = [
     lights: ['light.kitchen_main_light', 'light.kitchen_handle_light'],
     switches: ['switch.coffee_bar_light', 'switch.kitchen_rear_cabinet_light'],
     appliances: [
-      { name: 'Dishwasher', icon: 'mdi:dishwasher', entity: 'switch.dishwasher_power' },
-      { name: 'Oven', icon: 'mdi:stove', entity: 'switch.oven_power' },
-      { name: 'Hob', icon: 'mdi:gas-burner', entity: 'switch.hob_power' },
-      { name: 'Fridge', icon: 'mdi:fridge', entity: 'switch.fridge_freezer_power', statusEntity: 'sensor.fridge_freezer_temperature' },
+      {
+        name: 'Dishwasher', icon: 'mdi:dishwasher', entity: 'switch.dishwasher_power',
+        type: 'dishwasher',
+        entities: {
+          door: 'sensor.dishwasher_door',
+          status: 'sensor.dishwasher_operation_state',
+          program: 'select.dishwasher_selected_program',
+          activeProgram: 'select.dishwasher_active_program',
+          progress: 'sensor.dishwasher_program_progress',
+          finishTime: 'sensor.dishwasher_program_finish_time',
+          delayStart: 'number.dishwasher_start_in_relative',
+          stop: 'button.dishwasher_stop_program',
+          intensive: 'switch.dishwasher_intensive_zone',
+          varioSpeed: 'switch.dishwasher_vario_speed',
+          halfLoad: 'switch.dishwasher_half_load',
+          extraDry: 'switch.dishwasher_extra_dry',
+          hygiene: 'switch.dishwasher_hygiene',
+          silence: 'switch.dishwasher_silence_on_demand',
+          remoteControl: 'binary_sensor.dishwasher_remote_control',
+          connectivity: 'binary_sensor.dishwasher_connectivity',
+        },
+      },
+      {
+        name: 'Oven', icon: 'mdi:stove', entity: 'switch.oven_power',
+        type: 'oven',
+        entities: {
+          door: 'sensor.oven_door',
+          status: 'sensor.oven_operation_state',
+          cavityTemp: 'sensor.oven_current_oven_cavity_temperature',
+          targetTemp: 'number.oven_setpoint_temperature',
+          program: 'select.oven_selected_program',
+          activeProgram: 'select.oven_active_program',
+          progress: 'sensor.oven_program_progress',
+          finishTime: 'sensor.oven_program_finish_time',
+          duration: 'number.oven_duration',
+          delayStart: 'number.oven_start_in_relative',
+          alarm: 'number.oven_alarm_clock',
+          childLock: 'switch.oven_child_lock',
+          stop: 'button.oven_stop_program',
+          pause: 'button.oven_pause_program',
+          resume: 'button.oven_resume_program',
+          remoteControl: 'binary_sensor.oven_remote_control',
+          connectivity: 'binary_sensor.oven_connectivity',
+        },
+      },
+      {
+        name: 'Hob', icon: 'mdi:gas-burner', entity: 'switch.hob_power',
+        type: 'hob',
+        entities: {
+          status: 'sensor.hob_operation_state',
+          childLock: 'switch.hob_child_lock',
+          alarm: 'number.hob_alarm_clock',
+          connectivity: 'binary_sensor.hob_connectivity',
+        },
+      },
+      {
+        name: 'Fridge', icon: 'mdi:fridge', entity: 'switch.fridge_freezer_power',
+        type: 'fridge',
+        statusEntity: 'number.fridge_freezer_refrigerator_temperature',
+        entities: {
+          fridgeTemp: 'number.fridge_freezer_refrigerator_temperature',
+          freezerTemp: 'number.fridge_freezer_freezer_temperature',
+          fridgeDoor: 'binary_sensor.fridge_freezer_refrigerator_door',
+          freezerDoor: 'binary_sensor.fridge_freezer_freezer_door',
+          door: 'sensor.fridge_freezer_door',
+          ecoMode: 'switch.fridge_freezer_eco_mode',
+          freshMode: 'switch.fridge_freezer_fresh_mode',
+          superCool: 'switch.fridge_freezer_refrigerator_super_mode',
+          superFreeze: 'switch.fridge_freezer_freezer_super_mode',
+          sabbathMode: 'switch.fridge_freezer_sabbath_mode',
+          vacationMode: 'switch.fridge_freezer_vacation_mode',
+          internalLight: 'light.fridge_freezer_internal_light',
+          connectivity: 'binary_sensor.fridge_freezer_connectivity',
+        },
+      },
     ],
+    media: [],
+    sensors: [],
   },
   {
     id: 'living-room',
@@ -46,10 +130,9 @@ export const rooms: RoomConfig[] = [
     category: 'main',
     lights: ['light.living_room_main_light', 'light.living_room_hallway_light'],
     switches: [],
-    appliances: [
-      { name: 'TV', icon: 'mdi:television', entity: 'media_player.living_room_tv' },
-      { name: 'Sonos', icon: 'mdi:speaker', entity: 'media_player.living_room_sonos' },
-    ],
+    appliances: [],
+    media: ['media_player.living_room_sonos', 'media_player.living_room_tv'],
+    sensors: [],
   },
   {
     id: 'dining-room',
@@ -62,6 +145,8 @@ export const rooms: RoomConfig[] = [
     lights: ['light.dining_room_main_light', 'light.dining_room_cabinet_light'],
     switches: [],
     appliances: [],
+    media: [],
+    sensors: [],
   },
   {
     id: 'master-bedroom',
@@ -74,6 +159,12 @@ export const rooms: RoomConfig[] = [
     lights: [],
     switches: [],
     appliances: [],
+    media: [],
+    sensors: [
+      { name: 'Air Quality', entity: 'sensor.master_bedroom_air_quality_monitor_air_quality', icon: 'mdi:air-filter' },
+      { name: 'CO\u2082', entity: 'sensor.master_bedroom_air_quality_monitor_carbon_dioxide', icon: 'mdi:molecule-co2' },
+      { name: 'PM2.5', entity: 'sensor.master_bedroom_air_quality_monitor_pm2_5', icon: 'mdi:blur' },
+    ],
   },
   {
     id: 'lillas-room',
@@ -86,6 +177,8 @@ export const rooms: RoomConfig[] = [
     lights: [],
     switches: [],
     appliances: [],
+    media: [],
+    sensors: [],
   },
   {
     id: 'office',
@@ -98,6 +191,8 @@ export const rooms: RoomConfig[] = [
     lights: ['light.office_light'],
     switches: [],
     appliances: [],
+    media: [],
+    sensors: [],
   },
   {
     id: 'garage',
@@ -110,6 +205,8 @@ export const rooms: RoomConfig[] = [
     lights: ['light.garage_main_light'],
     switches: [],
     appliances: [],
+    media: [],
+    sensors: [],
   },
   {
     id: 'basement',
@@ -122,6 +219,8 @@ export const rooms: RoomConfig[] = [
     lights: [],
     switches: [],
     appliances: [],
+    media: [],
+    sensors: [],
   },
   {
     id: 'front-bathroom',
@@ -134,6 +233,8 @@ export const rooms: RoomConfig[] = [
     lights: ['light.front_bathroom_light', 'light.front_bathroom_mirror_light'],
     switches: [],
     appliances: [],
+    media: [],
+    sensors: [],
   },
   {
     id: 'rear-bathroom',
@@ -146,6 +247,8 @@ export const rooms: RoomConfig[] = [
     lights: ['light.rear_bathroom_mirror_light'],
     switches: [],
     appliances: [],
+    media: [],
+    sensors: [],
   },
   {
     id: 'hallway',
@@ -158,6 +261,32 @@ export const rooms: RoomConfig[] = [
     lights: ['light.hallway_spots'],
     switches: [],
     appliances: [],
+    media: [],
+    sensors: [],
+  },
+  {
+    id: 'workshop',
+    name: 'Workshop',
+    icon: 'mdi:hammer-wrench',
+    color: 'neutral',
+    temperatureEntity: 'sensor.garage_sensor_temperature',
+    humidityEntity: 'sensor.garage_sensor_humidity',
+    category: 'utility',
+    lights: [],
+    switches: [],
+    appliances: [
+      {
+        name: '3D Printer', icon: 'mdi:printer-3d', entity: 'input_select.printer_3d_status',
+        type: 'printer',
+        entities: {
+          status: 'input_select.printer_3d_status',
+          progress: 'sensor.x1c_00m00a2b0805242_print_progress',
+          camera: 'camera.x1c_00m00a2b0805242_camera',
+        },
+      },
+    ],
+    media: [],
+    sensors: [],
   },
 ]
 
@@ -318,4 +447,12 @@ export const systemEntities = {
     'update.browser_mod_update',
     'update.adaptive_lighting_update',
   ],
+} as const
+
+export const glanceEntities = {
+  personBenjamin: 'person.benjamin',
+  personDia: 'person.dia',
+  insideTemp: 'sensor.raikiri_inside_temperature',
+  outsideTemp: 'sensor.raikiri_outside_temperature',
+  serverPower: 'sensor.server_plug_power',
 } as const

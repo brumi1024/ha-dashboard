@@ -1,5 +1,6 @@
 import { colors, spacing } from '../../styles/theme'
 import { DeviceCard } from './DeviceCard'
+import { LightCard } from './LightCard'
 
 interface DeviceSectionProps {
   title: string
@@ -17,16 +18,20 @@ export function DeviceSection({ title, entities }: DeviceSectionProps) {
         color: colors.textMuted,
         marginBottom: spacing.md,
       }}>
-        {title}
+        {title.toUpperCase()}
       </h3>
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
         gap: spacing.sm,
       }}>
-        {entities.map((entity) => (
-          <DeviceCard key={entity} entity={entity} />
-        ))}
+        {entities.map((entity) =>
+          entity.startsWith('light.') ? (
+            <LightCard key={entity} entity={entity} />
+          ) : (
+            <DeviceCard key={entity} entity={entity} />
+          )
+        )}
       </div>
     </div>
   )

@@ -34,7 +34,7 @@ export function GreetingCard({ now = new Date() }: GreetingCardProps) {
         }
       </div>
       <div>
-        <div style={{ fontSize: '24px', fontWeight: 700, letterSpacing: '-0.02em', fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif" }}>{greeting}, {name}!</div>
+        <div style={{ fontSize: '24px', fontWeight: 700, letterSpacing: '-0.02em' }}>{greeting}, {name}!</div>
         <div style={{ fontSize: '13px', color: colors.textSecondary }}>{subtitle}</div>
       </div>
     </div>

@@ -151,7 +151,7 @@ function useMediaPosition(
   isPlaying: boolean,
 ) {
   const [position, setPosition] = useState(mediaPosition ?? 0)
-  const rafRef = useRef<number>()
+  const rafRef = useRef<number>(undefined)
 
   useEffect(() => {
     if (!isPlaying || mediaPosition == null || duration === 0) {

@@ -39,7 +39,6 @@ export function TabBar({ tabs, activeTab, onTabChange }: TabBarProps) {
               color: isActive ? colors.textPrimary : colors.textSecondary,
               cursor: 'pointer',
               fontSize: '13px',
-              fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif",
               fontWeight: isActive ? 600 : 400,
               letterSpacing: '0.2px',
               transition: 'all 0.3s cubic-bezier(0.32, 0.72, 0, 1)',

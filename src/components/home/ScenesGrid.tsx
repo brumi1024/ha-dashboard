@@ -80,7 +80,6 @@ function SceneButton({ scene, scriptService }: { scene: typeof sceneActions[numb
         cursor: 'pointer',
         fontSize: '11px',
         fontWeight: 500,
-        fontFamily: 'inherit',
         flexShrink: 0,
       }}
     >

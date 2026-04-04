@@ -285,7 +285,7 @@ function WeatherDetailContent({ onClose }: { onClose: () => void }) {
               padding: `${spacing.xs} ${spacing.md}`,
               border: 'none', cursor: 'pointer',
               color: activeTab === tab.id ? colors.textPrimary : colors.textMuted,
-              fontFamily: 'inherit', fontSize: '13px', fontWeight: 500,
+              fontSize: '13px', fontWeight: 500,
               flexShrink: 0,
             }}
           >

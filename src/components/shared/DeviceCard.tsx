@@ -30,7 +30,6 @@ export function DeviceCard({ entity, name }: DeviceCardProps) {
         width: '100%',
         textAlign: 'left',
         fontSize: '14px',
-        fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif",
       }}
     >
       <span style={{

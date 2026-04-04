@@ -9,7 +9,7 @@ import { spacing } from '../styles/theme'
 export function SolarGridView() {
   return (
     <div className="stagger-in" style={{ maxWidth: '700px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: spacing.md }}>
-      <h1 style={{ textAlign: 'center', fontSize: '28px', fontWeight: 700, letterSpacing: '-0.02em', fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif", marginBottom: spacing.sm }}>Energy</h1>
+      <h1 style={{ textAlign: 'center', fontSize: '28px', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: spacing.sm }}>Energy</h1>
       <BalanceHeader />
       <div className="liquid-glass" style={{ padding: spacing.md, overflow: 'hidden' }}>
         <SolarChart />

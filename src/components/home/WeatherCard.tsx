@@ -19,6 +19,7 @@ import {
 import { weatherEntity } from '../../config/rooms'
 import { useForecast } from '../../hooks/useForecast'
 import { colors, spacing } from '../../styles/theme'
+import { formatWeatherCondition } from '../../utils/formatters'
 
 export const conditionIcons: Record<string, string> = {
   'sunny': mdiWeatherSunny,
@@ -39,7 +40,7 @@ export const conditionIcons: Record<string, string> = {
 }
 
 export function formatCondition(condition: string): string {
-  return condition.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+  return formatWeatherCondition(condition)
 }
 
 interface WeatherCardProps {

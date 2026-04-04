@@ -15,7 +15,7 @@ export function GridSection() {
 
   return (
     <div>
-      <h3 style={{ fontSize: '16px', fontWeight: 600, fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif", marginBottom: spacing.md }}>Grid</h3>
+      <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: spacing.md }}>Grid</h3>
       <div style={{ display: 'flex', gap: spacing.lg, marginBottom: spacing.lg }}>
         <div>
           <div style={{ fontSize: '12px', color: colors.gridImport, marginBottom: spacing.xs }}>Import</div>

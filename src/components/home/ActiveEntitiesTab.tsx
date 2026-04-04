@@ -36,7 +36,6 @@ function LightStatus({ entityId, roomName }: { entityId: string; roomName: strin
           padding: `${spacing.xs} ${spacing.sm}`,
           cursor: 'pointer',
           fontSize: '12px',
-          fontFamily: 'inherit',
         }}
       >
         Turn off

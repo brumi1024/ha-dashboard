@@ -58,7 +58,6 @@ export function ModesSection() {
                 background: isActive ? 'rgba(255, 255, 255, 0.12)' : 'transparent',
                 cursor: 'pointer',
                 color: isActive ? config.color : colors.textSecondary,
-                fontFamily: 'inherit',
                 fontSize: '13px',
                 fontWeight: isActive ? 600 : 400,
                 transition: 'all 0.3s cubic-bezier(0.32, 0.72, 0, 1)',

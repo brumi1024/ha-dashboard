@@ -16,7 +16,7 @@ export function BalanceHeader() {
       <div style={{ display: 'flex', alignItems: 'center', gap: spacing.sm, justifyContent: 'center' }}>
         <span style={{ fontSize: '20px' }}>⚡</span>
         <div>
-          <div style={{ fontSize: '18px', fontWeight: 600, fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif" }}>{status}</div>
+          <div style={{ fontSize: '18px', fontWeight: 600 }}>{status}</div>
           <div style={{ fontSize: '13px', color: colors.textSecondary }}>
             Solar <AnimatedCounter value={solarW} suffix="W" /> · Home <AnimatedCounter value={homeW} suffix="W" />
           </div>

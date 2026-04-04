@@ -1,5 +1,5 @@
 import { Icon } from '@mdi/react'
-import { mdiHome, mdiFloorPlan, mdiSolarPower, mdiCarElectric, mdiCogOutline, mdiDotsHorizontal } from '@mdi/js'
+import { mdiHome, mdiFloorPlan, mdiSolarPower, mdiCarElectric, mdiCogOutline, mdiEye } from '@mdi/js'
 import { NavLink } from 'react-router-dom'
 import { colors, borderRadius } from '../../styles/theme'
 
@@ -9,7 +9,7 @@ export const navItems = [
   { to: '/energy/solar', icon: mdiSolarPower, label: 'Energy' },
   { to: '/energy/ev', icon: mdiCarElectric, label: 'EV' },
   { to: '/system', icon: mdiCogOutline, label: 'System' },
-  { to: '/more', icon: mdiDotsHorizontal, label: 'More' },
+  { to: '/glance', icon: mdiEye, label: 'Glance' },
 ]
 
 export function Sidebar() {

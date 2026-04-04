@@ -17,7 +17,7 @@ export function NetMeteringSection() {
 
   return (
     <div>
-      <h3 style={{ fontSize: '16px', fontWeight: 500, fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif", marginBottom: spacing.md }}>Net Metering</h3>
+      <h3 style={{ fontSize: '16px', fontWeight: 500, marginBottom: spacing.md }}>Net Metering</h3>
       <div style={{ display: 'flex', alignItems: 'center', gap: spacing.sm, marginBottom: spacing.md, color: isDeficit ? colors.statusAlert : colors.statusGood }}>
         <span>{isDeficit ? '🔴' : '🟢'}</span>
         <span style={{ fontWeight: 500 }}>{statusVal} ({balanceVal})</span>

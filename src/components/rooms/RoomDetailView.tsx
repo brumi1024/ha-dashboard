@@ -1,6 +1,11 @@
+import { useState } from 'react'
 import { useEntity, type EntityName } from '@hakit/core'
-import type { RoomConfig } from '../../config/rooms'
+import type { RoomConfig, ApplianceConfig, SensorConfig } from '../../config/rooms'
 import { DeviceSection } from '../shared/DeviceSection'
+import { RoomMediaCard } from '../shared/RoomMediaCard'
+import { SensorBadge } from '../shared/SensorBadge'
+import { SensorHistorySheet } from '../shared/SensorHistorySheet'
+import { ApplianceSheet } from '../appliances/ApplianceSheet'
 import { colors, spacing } from '../../styles/theme'
 
 interface RoomDetailViewProps {
@@ -8,6 +13,9 @@ interface RoomDetailViewProps {
 }
 
 export function RoomDetailView({ room }: RoomDetailViewProps) {
+  const [selectedSensor, setSelectedSensor] = useState<SensorConfig | null>(null)
+  const [selectedAppliance, setSelectedAppliance] = useState<ApplianceConfig | null>(null)
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: spacing.md }}>
       <DeviceSection title="Lights" entities={room.lights} />
@@ -15,19 +23,55 @@ export function RoomDetailView({ room }: RoomDetailViewProps) {
 
       {room.appliances.length > 0 && (
         <div>
-          <h3 className="section-label" style={{ fontSize: '13px', fontWeight: 600, color: colors.textMuted, marginBottom: spacing.md }}>Appliances</h3>
+          <h3 className="section-label" style={{ fontSize: '13px', fontWeight: 600, color: colors.textMuted, marginBottom: spacing.md }}>APPLIANCES</h3>
           <div style={{ display: 'flex', gap: spacing.lg, flexWrap: 'wrap', justifyContent: 'center' }}>
             {room.appliances.map((app) => (
-              <ApplianceIcon key={app.entity} appliance={app} />
+              <ApplianceIcon key={app.entity} appliance={app} onTap={() => setSelectedAppliance(app)} />
             ))}
           </div>
         </div>
       )}
+
+      {room.media.length > 0 && (
+        <div>
+          <h3 className="section-label" style={{ fontSize: '13px', fontWeight: 600, color: colors.textMuted, marginBottom: spacing.md }}>MEDIA</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: spacing.sm }}>
+            {room.media.map((entityId) => (
+              <RoomMediaCard key={entityId} entityId={entityId} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {room.sensors.length > 0 && (
+        <div>
+          <h3 className="section-label" style={{ fontSize: '13px', fontWeight: 600, color: colors.textMuted, marginBottom: spacing.md }}>SENSORS</h3>
+          <div style={{ display: 'flex', gap: spacing.sm, flexWrap: 'wrap' }}>
+            {room.sensors.map((sensor) => (
+              <SensorBadge key={sensor.entity} sensor={sensor} onTap={() => setSelectedSensor(sensor)} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {selectedSensor && (
+        <SensorHistorySheet
+          isOpen={!!selectedSensor}
+          onClose={() => setSelectedSensor(null)}
+          sensor={selectedSensor}
+        />
+      )}
+
+      <ApplianceSheet
+        isOpen={!!selectedAppliance}
+        onClose={() => setSelectedAppliance(null)}
+        appliance={selectedAppliance}
+      />
     </div>
   )
 }
 
-function ApplianceIcon({ appliance }: { appliance: RoomConfig['appliances'][number] }) {
+function ApplianceIcon({ appliance, onTap }: { appliance: ApplianceConfig; onTap: () => void }) {
   const entity = useEntity(appliance.entity as EntityName, { returnNullIfNotFound: true })
 
   const isActive = entity?.state === 'on' || entity?.state === 'active'
@@ -38,12 +82,13 @@ function ApplianceIcon({ appliance }: { appliance: RoomConfig['appliances'][numb
     'mdi:stove': '🔥',
     'mdi:gas-burner': '🔥',
     'mdi:fridge': '🧊',
+    'mdi:printer-3d': '🖨',
   }
 
   return (
     <button
       className="liquid-glass"
-      onClick={() => (entity as any)?.service?.toggle?.()}
+      onClick={onTap}
       style={{
         display: 'flex', flexDirection: 'column', alignItems: 'center',
         gap: spacing.xs, border: 'none',
